@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center row">
+    <div class="col-12">
+        <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Wedding Of</th>
+      <th scope="col">Date</th>
+      <th scope="col">Nr Dasmorve</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach(var dasma in ViewBag.dasmat){
+          <tr>
+      <th scope="row">@dasma.WeddingId</th>
+      <td>@dasma.WedderOne & @dasma.WedderTwo</td>
+      <td>@dasma.Date</td>
+      <td>@dasma.teFtuarit.Count</td>
+      <td>
+        @if(dasma.UserId == ViewBag.userId){
+           <a asp-action="DeleteDasem" asp-route-dasmaId="@dasma.WeddingId"> Fshi Dasem</a> 
+        }else{
+          
+          List<Pjesemarrja> lista = dasma.teFtuarit;
+          bool kaIkNeDasem = lista.Any(e=>e.UserId == ViewBag.userId);
+          if(!kaIkNeDasem){
+             <a asp-action="ShkoDasem" asp-route-dasmaId="@dasma.WeddingId"> Shko Ne Dasem</a> 
+          }else{
+            <a asp-action="MosShkoDasem" asp-route-dasmaId="@dasma.WeddingId"> Mos Shko Ne Dasem</a> 
+          }
+         
+        }
+
+        
+        
+        </td>
+    </tr>
+    }
+  
+
+  </tbody>
+</table>
+    </div>
+    </div>
